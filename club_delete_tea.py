@@ -8,9 +8,15 @@ club_delete_tea_bp = Blueprint('club_delete_tea', __name__, url_prefix='/club_de
 
 #DB接続
 def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
+    connection = psycopg2.connect(
+        host = 'ec2-54-234-13-16.compute-1.amazonaws.com',
+        port = 5432,
+        user = 'zarkkyemspcoid',
+        database = 'dfqoek2gg56o51',
+        password = '45dfed78f4c7af7f221e0c0c181024710e39ac2ee4ca532bb7ee03a7a9a7eb1e'
+    )
     return connection
+
 
 @club_delete_tea_bp.route('/club_delete_tea', methods = ['POST'])
 def club_delete_tea():
