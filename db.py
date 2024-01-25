@@ -9,13 +9,8 @@ import smtplib
 
 #DB接続
 def get_connection():
-    connection = psycopg2.connect(
-        host = 'ec2-54-234-13-16.compute-1.amazonaws.com',
-        port = 5432,
-        user = 'zarkkyemspcoid',
-        database = 'dfqoek2gg56o51',
-        password = '45dfed78f4c7af7f221e0c0c181024710e39ac2ee4ca532bb7ee03a7a9a7eb1e'
-    )
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
     return connection
 
 def get_hash(password, salt):
@@ -103,6 +98,17 @@ def select_department():
     connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql)
+    department_list = []
+    for row in cursor.fetchall():
+        department_list.append((row[0], row[1]))
+    connection.close()
+    return department_list
+
+def select_departmentname(id):
+    sql = "SELECT * FROM department"
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(sql, (id,))
     department_list = []
     for row in cursor.fetchall():
         department_list.append((row[0], row[1]))
@@ -307,12 +313,16 @@ def get_id(mail):
 #メールアドレスから学生id取得
 def get_sc(id):
     sql = "SELECT * FROM student_club WHERE student_id = %s"
-    connection = get_connection()
-    cursor = connection.cursor()
-    cursor.execute(sql, (id,))
-    id = cursor.fetchone()
-    cursor.close()
-    connection.close()
+    try :
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (id,))
+        id = cursor.fetchone()
+    except psycopg2.DatabaseError:
+        id = False
+    finally:
+        cursor.close()
+        connection.close()
     return id
 
 #リーダーidからサークルid取得

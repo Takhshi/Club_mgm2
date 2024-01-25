@@ -1,6 +1,6 @@
 
 from flask import Blueprint, redirect, render_template, request, session, url_for
-import hashlib, string, random, psycopg2, db, os, bcrypt, datetime, admin_db
+import hashlib, string, random, psycopg2, db, os, bcrypt, datetime, admin_db, club
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
@@ -9,15 +9,9 @@ admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 #DB接続
 def get_connection():
-    connection = psycopg2.connect(
-        host = 'ec2-54-234-13-16.compute-1.amazonaws.com',
-        port = 5432,
-        user = 'zarkkyemspcoid',
-        database = 'dfqoek2gg56o51',
-        password = '45dfed78f4c7af7f221e0c0c181024710e39ac2ee4ca532bb7ee03a7a9a7eb1e'
-    )
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
     return connection
-
 
 @admin_bp.route('/tea_regist')
 def tea_regist():
@@ -58,11 +52,13 @@ def tea_regist_exe():
 #ログイン
 @admin_bp.route('/login')
 def login():
-    return render_template('admin/login.html')
+        club_list = club.club_list()
+        return render_template('admin/login.html')
 
 #入力後の画面遷移
 @admin_bp.route('/login_exe', methods=['POST'])
 def login_exe():
+    club_list = club.club_list()
     mail = request.form.get('mail')
     password = request.form.get('password')
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
@@ -79,7 +75,7 @@ def login_exe():
             # ハッシュが一致すればログイン成功
             if admin_db.login(mail, password) == True:
                 session['mail'] = mail  # セッションにユーザー情報を保存
-                return render_template('top/top_teacher.html')
+                return render_template('top/top_teacher.html', club_list=club_list)
             else:
                 print('Invalid password')
                 return render_template('admin/login.html')

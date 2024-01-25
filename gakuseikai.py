@@ -8,15 +8,9 @@ gakuseikai_bp = Blueprint('gakuseikai', __name__, url_prefix='/gakuseikai')
 
 #DB接続
 def get_connection():
-    connection = psycopg2.connect(
-        host = 'ec2-54-234-13-16.compute-1.amazonaws.com',
-        port = 5432,
-        user = 'zarkkyemspcoid',
-        database = 'dfqoek2gg56o51',
-        password = '45dfed78f4c7af7f221e0c0c181024710e39ac2ee4ca532bb7ee03a7a9a7eb1e'
-    )
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
     return connection
-
 
 #サークル立ち上げ申請リスト
 @gakuseikai_bp.route('/approve_list_st')
