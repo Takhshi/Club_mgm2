@@ -7,10 +7,8 @@ from email.mime.application import MIMEApplication
 teacher_mgm_bp = Blueprint('teacher_mgm', __name__, url_prefix='/teacher_mgm')
 
 #DB接続
-def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
-    return connection
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 @teacher_mgm_bp.route('/teacher_display')
 def teacher_display():
@@ -18,7 +16,7 @@ def teacher_display():
     return render_template('teacher_disp.html' ,teacher = tea_list)
 
 def get_teacher():
-    connection = get_connection()
+    connection = conn
     cursor = connection.cursor()
     
     sql = "SELECT * FROM teacher "
@@ -42,7 +40,7 @@ def teacher_delete_res():
     return render_template('delete_teacher_res.html')
 
 def delete_teacher(mail):
-    connection = get_connection()
+    connection = conn
     cursor = connection.cursor()
     sql = "DELETE FROM teacher WHERE mail = %s"
     cursor.execute(sql, (mail,))

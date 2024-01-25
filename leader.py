@@ -7,10 +7,8 @@ from email.mime.application import MIMEApplication
 leader_bp = Blueprint('leader', __name__, url_prefix='/leader')
 
 #DB接続
-def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
-    return connection
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 @leader_bp.route("/requst_list")
 def request_list():
@@ -27,7 +25,7 @@ def request_list():
 
 def get_request(club_id):
     sql = "SELECT * FROM student_club WHERE allow = 0 and club_id = %s"
-    connection = get_connection()
+    connection = conn
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     list = cursor.fetchall()

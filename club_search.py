@@ -7,10 +7,8 @@ from email.mime.application import MIMEApplication
 club_search_bp =  Blueprint('club_search', __name__, url_prefix='/club_search')
 
 #DB接続
-def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
-    return connection
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # サークル検索
 # ログイン前サークル検索
@@ -77,7 +75,7 @@ def club_search_restea():
 #サークル検索機能
 def club_search(name,introduction):
     try:
-        connection = get_connection()
+        connection = conn
         cursor = connection.cursor()
         sql = "SELECT * FROM club WHERE allow = 2 and (name LIKE %s or introduction LIKE %s) "
         name2 = "%" + name + "%"

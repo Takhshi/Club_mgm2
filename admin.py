@@ -8,10 +8,8 @@ from email.mime.application import MIMEApplication
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 #DB接続
-def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
-    return connection
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 @admin_bp.route('/tea_regist')
 def tea_regist():
@@ -35,7 +33,7 @@ def tea_regist_exe():
     salt = db.get_salt()
     sql = 'INSERT INTO teacher(name, mail, password, first_pass_change, salt) VALUES(%s, %s, %s, %s, %s)' #name, mail,password, first_pass_change, salt
     try :
-        connection = get_connection()
+        connection = conn
         cursor = connection.cursor()   
         cursor.execute(sql, (name, mail, password, False, salt))
         connection.commit()
