@@ -7,8 +7,11 @@ from email.mime.application import MIMEApplication
 mypage_bp = Blueprint('mypage_bp', __name__, url_prefix='/mypage_bp')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 #マイページ機能
 @mypage_bp.route('/')
@@ -87,7 +90,7 @@ def mypage_cou():
 #名前を取得するメソッド    
 def get_name(mail):
     sql = "SELECT name FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     name = cursor.fetchone()
@@ -98,7 +101,7 @@ def get_name(mail):
 #入学年度を取得するメソッド
 def get_entrance_year(mail):
     sql = "SELECT entrance_year FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     entrance_year = cursor.fetchone()   
@@ -109,7 +112,7 @@ def get_entrance_year(mail):
 #学科idを取得するメソッド
 def get_department_id(mail):
     sql = "SELECT department_id FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     department_id = cursor.fetchone()   
@@ -120,7 +123,7 @@ def get_department_id(mail):
 #学科を取得するメソッド
 def get_department(department_id):
     sql = "SELECT name FROM department WHERE department_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (department_id,))
     department = cursor.fetchone()
@@ -131,7 +134,7 @@ def get_department(department_id):
 #学生idを取得するメソッド
 def get_student_id(mail):
     sql = "SELECT student_id FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     studnet_id = cursor.fetchone()
@@ -142,7 +145,7 @@ def get_student_id(mail):
 # クラブidを取得するメソッド    
 def get_club_id(student_id):
     sql = "SELECT club_id FROM student_club WHERE student_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql,(student_id,))
     club_id_list = []
@@ -155,7 +158,7 @@ def get_club_id(student_id):
 #クラブ名を取得するメソッド
 def get_club_name(club_id_list):
     sql = "SELECT name FROM club WHERE club_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id_list,))
     club_name = cursor.fetchone()
@@ -171,7 +174,7 @@ def mypage_tea():
 
 def get_tea_name(mail):
     sql = "SELECT name FROM teacher WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     name = cursor.fetchone()

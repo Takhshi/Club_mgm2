@@ -5,8 +5,10 @@ from datetime import date
 club_bp = Blueprint('club', __name__, url_prefix='/club')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 #サークル参加申請処理
 @club_bp.route("/club_join_req", methods=["POST"])
@@ -32,7 +34,7 @@ def club_join_req3():
     print(club_id)
     sql = "INSERT INTO student_club (student_id, club_id, is_leader, allow) VALUES (%s, %s, %s, %s)"
     try :
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()   
         cursor.execute(sql, (student_id, club_id, False, 0))
         connection.commit()

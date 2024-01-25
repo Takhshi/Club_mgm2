@@ -7,8 +7,10 @@ from email.mime.application import MIMEApplication
 club_withdrawal_bp =  Blueprint('club_withdrawal', __name__, url_prefix='/club_withdrawal')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 #学生サークル脱退機能
 @club_withdrawal_bp.route('/club_withdrawal', methods=['POST'])
@@ -60,7 +62,7 @@ def club_withdrawal_res_cou():
 
 def get_student_id(mail):
     sql = "SELECT student_id FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     studnet_id = cursor.fetchone()
@@ -71,7 +73,7 @@ def get_student_id(mail):
 # クラブidを取得するメソッド    
 def get_club_id(club_name):
     sql = "SELECT club_id FROM club WHERE name = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_name,))
     club_id = cursor.fetchone()
@@ -81,7 +83,7 @@ def get_club_id(club_name):
 
 #student_clubテーブルから情報を削除するメソッド
 def delete_student_club(student_id, club_id):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "DELETE FROM student_club WHERE student_id = %s AND club_id =%s "
     cursor.execute(sql, (student_id,club_id))

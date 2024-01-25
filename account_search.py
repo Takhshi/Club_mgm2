@@ -7,8 +7,10 @@ from email.mime.application import MIMEApplication
 account_search_bp = Blueprint('account_search', __name__, url_prefix='/account_search')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 #学生アカウント検索
 @account_search_bp.route("/student_search")
@@ -53,7 +55,7 @@ def student_search_res():
         
 #学生アカウント検索
 def student_search(name):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     
     sql = "SELECT * FROM student WHERE name LIKE %s"
@@ -66,7 +68,7 @@ def student_search(name):
     return rows
 
 def search_department(department_num):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     
     sql = "SELECT * FROM student WHERE department_id = %s"
@@ -78,7 +80,7 @@ def search_department(department_num):
     return rows
 
 def count_club(name):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT COUNT (club_id) FROM student_club WHERE name LIKE %s"
     name2 = "%" + name + "%"

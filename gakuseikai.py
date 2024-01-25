@@ -7,8 +7,10 @@ app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
 gakuseikai_bp = Blueprint('gakuseikai', __name__, url_prefix='/gakuseikai')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 #サークル立ち上げ申請リスト
 @gakuseikai_bp.route('/approve_list_st')
@@ -63,7 +65,7 @@ def club_not_create_exe():
 def select_allow0_club():
     #リーダーidを取得
     sql = "SELECT * FROM club WHERE allow = 0"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql)
     club_list = []

@@ -7,8 +7,10 @@ from email.mime.application import MIMEApplication
 account_bp = Blueprint('account', __name__, url_prefix='/account')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 # アカウント登録画面
 @account_bp.route('/regist')
@@ -67,7 +69,7 @@ def regist_execute():
         password = session.get('password')
 
         # データベースに接続してユーザーの重複を確認
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
 
         try:
@@ -151,7 +153,7 @@ def logout():
 def get_account_pass(mail):
     sql = 'SELECT password FROM student WHERE mail = %s'
     try:
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (mail,))
         passw = cursor.fetchone()
@@ -167,7 +169,7 @@ def get_account_pass(mail):
 def get_account_salt(mail):
     sql = 'SELECT salt FROM student WHERE mail = %s'
     try:
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (mail,))
         salt = cursor.fetchone()

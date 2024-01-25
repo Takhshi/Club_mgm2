@@ -8,8 +8,10 @@ import random
 import smtplib
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 def get_hash(password, salt):
     # 文字列をバイト列に変換
@@ -24,7 +26,7 @@ def get_hash(password, salt):
 def select_otp(mail):
     sql = "SELECT onetimepassword from student WHERE mail = %s"
     try:
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (mail,))
         passw = cursor.fetchone() 
@@ -42,7 +44,7 @@ def get_account_pass(mail):
     sql = 'SELECT password FROM users WHERE mail = %s'
     
     try:
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (mail,))
         passw = cursor.fetchone()
@@ -60,7 +62,7 @@ def get_account_salt(mail):
     sql = 'SELECT salt FROM users WHERE mail = %s'
     
     try:
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (mail,))
         salt = cursor.fetchone()
@@ -93,7 +95,7 @@ def generate_otp():
 # 学科取得（登録時に選択でだすやつ）
 def select_department():
     sql = "SELECT * FROM department"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql)
     department_list = []
@@ -104,7 +106,7 @@ def select_department():
 
 def select_departmentname(id):
     sql = "SELECT * FROM department"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (id,))
     department_list = []
@@ -144,7 +146,7 @@ def send_email(to_address, subject, body):
 def request_club(club_name, leader_mail, objective, activities, introduction, note):
     sql = 'INSERT INTO club VALUES (default, %s, %s, %s, %s, %s, %s, 0)'
     try : # 例外処理
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (club_name, leader_mail, objective, activities, introduction, note))
         count = cursor.rowcount # 更新件数を取得
@@ -157,7 +159,7 @@ def request_club(club_name, leader_mail, objective, activities, introduction, no
     return count
 
 def get_request_club():
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT name, leader_id, objective, activities, introduction FROM club where name = 'Python開発サークル'"
     cursor.execute(sql)
@@ -168,7 +170,7 @@ def get_request_club():
 
 #サークル詳細
 def get_club_detail(club_id):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT name, leader_id, objective, activities, introduction, note FROM club where club_id = %s"
     cursor.execute(sql, (club_id,))
@@ -179,7 +181,7 @@ def get_club_detail(club_id):
 
 #サークル立ち上げ申請に入っている学生idの取得
 def get_student_id_from_student_club(club_id):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT student_id FROM student_club where club_id = %s and is_leader = False"
     cursor.execute(sql, (club_id,))
@@ -190,7 +192,7 @@ def get_student_id_from_student_club(club_id):
 
 #学生idから学生の情報取得
 def get_student(student_id):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT * FROM student WHERE student_id = %s"
     cursor.execute(sql, (student_id,))
@@ -203,7 +205,7 @@ def get_student(student_id):
 def delete_request(club_id):
     delete_from_student_club(club_id)
     sql = "DELETE FROM club WHERE club_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     connection.commit()
@@ -213,7 +215,7 @@ def delete_request(club_id):
 #サークル消す前にs_tテーブルを削除
 def delete_from_student_club(club_id):
     sql = "DELETE FROM student_club WHERE club_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     connection.commit()
@@ -224,7 +226,7 @@ def delete_from_student_club(club_id):
 #サークル削除（リーダーが消す）
 def delete_club(club_id):
     sql = "INSERT INTO club_delete(club_id, delete_request_time) VALUES(%s, now())"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id))
     connection.commit()
@@ -234,7 +236,7 @@ def delete_club(club_id):
 #メールアドレスから学生が存在するかの検索、名前の取得
 def student_seach_from_mail(mail):
     sql = "SELECT name, mail FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     list = cursor.fetchone()
@@ -244,7 +246,7 @@ def student_seach_from_mail(mail):
 
 def gakuseikai_regist(mail):
     sql = "UPDATE student SET is_gakuseikai = True WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()   
     cursor.execute(sql, (mail,))
     connection.commit()
@@ -273,7 +275,7 @@ def mail_send(to_address, subject, body):
 #リーダーid取得
 def get_leader():
     sql = "SELECT student_id FROM student_club WHERE is_leader = true"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql)
     leader_list = []
@@ -287,7 +289,7 @@ def get_leader():
 def first_club_member_add(student_id, club_id, flg):
     sql = "INSERT INTO student_club (student_id, club_id, is_leader, allow) VALUES (%s, %s, %s, %s)"
     try :
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()   
         cursor.execute(sql, (student_id, club_id, flg, 0))
         connection.commit()
@@ -300,7 +302,7 @@ def first_club_member_add(student_id, club_id, flg):
 #メールアドレスから学生id取得
 def get_id(mail):
     sql = "SELECT student_id FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     id = cursor.fetchone()
@@ -312,7 +314,7 @@ def get_id(mail):
 def get_sc(id):
     sql = "SELECT * FROM student_club WHERE student_id = %s"
     try :
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(sql, (id,))
         id = cursor.fetchone()
@@ -326,7 +328,7 @@ def get_sc(id):
 #リーダーidからサークルid取得
 def get_club_id(id):
     sql = "SELECT club_id FROM club WHERE leader_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (id,))
     id = cursor.fetchone()
@@ -337,7 +339,7 @@ def get_club_id(id):
 #サークルメンバー登録時のメールアドレス検索
 def student_seach_from_mail_in_clubcreate(mail):
     sql = "SELECT mail FROM student WHERE mail = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     list = cursor.fetchone()
@@ -349,7 +351,7 @@ def student_seach_from_mail_in_clubcreate(mail):
 #topおすすめサークル表示
 def get_club_list():
     sql = "SELECT club_id, name, introduction FROM club WHERE allow = 2"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql)
     list = cursor.fetchall()
@@ -360,7 +362,7 @@ def get_club_list():
 #サークル加入人数取得
 def count_joinedclub(club_id):
     sql = "SELECT count(student_id) FROM student_club WHERE club_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     list = cursor.fetchall()
@@ -371,7 +373,7 @@ def count_joinedclub(club_id):
 #サークル加入人数取得
 def get_joinedmember(club_id):
     sql = "SELECT student_id FROM student_club WHERE club_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     student_ids = cursor.fetchall()
@@ -383,7 +385,7 @@ def get_joinedmember(club_id):
 #スケジュール取得
 def get_schedule(club_id):
     sql = "SELECT * FROM schedule WHERE club_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     schedule = cursor.fetchall()

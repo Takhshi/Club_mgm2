@@ -40,9 +40,10 @@ app.register_blueprint(leader_bp)
 #------------------------------------
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 @app.route('/')
 def index():

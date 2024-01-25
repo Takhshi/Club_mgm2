@@ -7,8 +7,10 @@ from email.mime.application import MIMEApplication
 account_delete_bp = Blueprint('account_delete', __name__, url_prefix='/account_delete')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 @account_delete_bp.route('/account_delete', methods = ["POST"])
 def account_delete():
@@ -62,7 +64,7 @@ def account_delete():
     return render_template("account_delete_conf.html" ,mail = mail ,department = department, name = name, entrance_year = entrance_year )
 
 def get_department_num(mail):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     
     sql = "SELECT department_id FROM student WHERE mail = %s"
@@ -74,7 +76,7 @@ def get_department_num(mail):
     return department_num[0] if department_num else None
 
 def get_student_id(mail):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT student_id FROM student WHERE mail = %s"
     cursor.execute(sql, (mail,))
@@ -84,7 +86,7 @@ def get_student_id(mail):
     return student_id[0] if student_id else None
 
 def get_student_name(student_id):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT name FROM student WHERE student_id = %s"
     cursor.execute(sql, (student_id,))
@@ -107,7 +109,7 @@ def account_delete_conf():
     return render_template("account_delete_res.html")
     
 def delete_student(student_id):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "DELETE FROM student WHERE student_id = %s"
     cursor.execute(sql, (student_id,))
@@ -116,7 +118,7 @@ def delete_student(student_id):
     connection.close()
     
 def delete_student_club(student_id):
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()
     sql = "DELETE FROM student WHERE student_id = %s"
     cursor.execute(sql, (student_id,))

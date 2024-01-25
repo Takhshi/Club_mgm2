@@ -7,8 +7,10 @@ from email.mime.application import MIMEApplication
 club_bp2 = Blueprint('club2', __name__, url_prefix='/club2')
 
 #DB接続
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_connection():
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
+    return connection
 
 #参加申請一覧機能
 @club_bp2.route("/join_req_list")
@@ -20,7 +22,7 @@ def get_list():
     sql = "SELECT * FROM student_club WHERE allow = 0"
     
     try :
-        connection = conn
+        connection = get_connection()
         cursor = connection.cursor()   
         cursor.execute(sql )
         connection.commit()
@@ -63,7 +65,7 @@ def join_req_okexe():
 #student_idを元にallowを変更するUPDATE文
 def join_ok_sql(student_id):
     sql = "UPDATE student_club SET allow = 1 WHERE student_id = %s" 
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()   
     cursor.execute(sql, (student_id,))
     connection.commit()
@@ -93,7 +95,7 @@ def join_req_noconf():
 #student_idを元にallowを変更するUPDATE文
 def join_no_sql(student_id):
     sql = "UPDATE student_club SET allow = 2 WHERE student_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()   
     cursor.execute(sql, (student_id,))
     connection.commit()
@@ -104,7 +106,7 @@ def join_no_sql(student_id):
 #student_idから学生氏名取得  
 def get_name(id):
     sql = "SELECT name FROM student WHERE student_id = %s"
-    connection = conn
+    connection = get_connection()
     cursor = connection.cursor()   
     cursor.execute(sql, (id,))
     name_list = [row[0] for row in cursor.fetchall()]  # row[0] のみ取得
