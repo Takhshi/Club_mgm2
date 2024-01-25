@@ -8,8 +8,8 @@ club_delete_tea_bp = Blueprint('club_delete_tea', __name__, url_prefix='/club_de
 
 #DB接続
 def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
+    DATABASE_URL = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(DATABASE_URL)
     return connection
 
 @club_delete_tea_bp.route('/club_delete_tea', methods = ['POST'])
@@ -26,7 +26,7 @@ def club_delete_tea_conf():
     return render_template('delete_club_tea_res.html')
 
 def get_club_id(name):
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     sql = "SELECT club_id FROM club WHERE name = %s" 
     cursor.execute(sql,(name,))
@@ -36,7 +36,7 @@ def get_club_id(name):
     return club_id[0] if club_id else None
 
 def delete_club(club_id):
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     sql = "DELETE FROM club WHERE club_id = %s" 
     cursor.execute(sql,(club_id,))
@@ -45,7 +45,7 @@ def delete_club(club_id):
     connection.close()
     
 def delete_student_club(club_id):
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     sql = "DELETE FROM student_club WHERE club_id = %s" 
     cursor.execute(sql,(club_id,))

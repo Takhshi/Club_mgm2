@@ -6,8 +6,8 @@ club_bp = Blueprint('club', __name__, url_prefix='/club')
 
 #DB接続
 def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
+    DATABASE_URL = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(DATABASE_URL)
     return connection
 
 #サークル参加申請処理
@@ -34,7 +34,7 @@ def club_join_req3():
     print(club_id)
     sql = "INSERT INTO student_club (student_id, club_id, is_leader, allow) VALUES (%s, %s, %s, %s)"
     try :
-        connection = get_connection()
+        connection = connection
         cursor = connection.cursor()   
         cursor.execute(sql, (student_id, club_id, False, 0))
         connection.commit()

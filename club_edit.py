@@ -8,8 +8,8 @@ club_edit_bp = Blueprint('club_edit', __name__, url_prefix='/club_edit')
 
 #DB接続
 def get_connection():
-    url = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(url)
+    DATABASE_URL = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(DATABASE_URL)
     return connection
 
 #サークルリーダーの変更申請処理
@@ -25,7 +25,7 @@ def club_edit_start():
 # クラブidを取得するメソッド  
 def get_club_id(student_id):
     sql = "SELECT club_id FROM student_club WHERE student_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (student_id,))
     club_id = cursor.fetchone()
@@ -60,7 +60,7 @@ def club_edit_conf():
 
 def get_student_id(mail):
     sql = "SELECT student_id FROM student WHERE mail = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (mail,))
     studnet_id = cursor.fetchone()
@@ -71,7 +71,7 @@ def get_student_id(mail):
 
 def insert_club_change(club_id, club_name, student_id, objective, activites, introduction, note):
     sql = "INSERT INTO club_change (club_id, name, leader_id, objective, activities, introduction, note)VALUES(%s, %s, %s, %s, %s, %s, %s)"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (club_id, club_name, student_id, objective, activites, introduction, note))
     connection.commit()
@@ -91,7 +91,7 @@ def club_edit_reqlist():
 #leader_idの取得
 def get_leader_id():
     sql = "SELECT * FROM club_change "
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql)
     club_list = []
@@ -107,7 +107,7 @@ def get_leader_id():
     #reader_idからリーダーの情報を取得
 def get_leader(student_id):
     sql = "SELEcT * FROM student WHERE student_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (student_id,))
     leader = cursor.fetchone()
@@ -119,7 +119,7 @@ def get_leader(student_id):
 #department_idからdepartment_name取得
 def get_department(department_id):
     sql = "SELECT * FROM department WHERE department_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (department_id,))
     department = cursor.fetchone()
@@ -164,7 +164,7 @@ def disp_edit_req():
 
 def get_club_name(club_id):
     sql = "SELECT name FROM club_change WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     club_name = cursor.fetchone()
@@ -174,7 +174,7 @@ def get_club_name(club_id):
 
 def get_student_id2(club_id):
     sql = "SELECT leader_id FROM club_change WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     student_id = cursor.fetchone()
@@ -184,7 +184,7 @@ def get_student_id2(club_id):
 
 def get_leader_mail(student_id):
     sql = "SELECT mail FROM student WHERE student_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (student_id,))
     mail = cursor.fetchone()
@@ -194,7 +194,7 @@ def get_leader_mail(student_id):
 
 def get_objective(club_id):
     sql = "SELECT objective FROM club_change WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     objective = cursor.fetchone()
@@ -204,7 +204,7 @@ def get_objective(club_id):
 
 def get_activities(club_id):
     sql = "SELECT activities FROM club_change WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     activities = cursor.fetchone()
@@ -214,7 +214,7 @@ def get_activities(club_id):
 
 def get_introduction(club_id):
     sql = "SELECT introduction FROM club_change WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     introduction = cursor.fetchone()
@@ -224,7 +224,7 @@ def get_introduction(club_id):
 
 def get_note(club_id):
     sql = "SELECT note FROM club_change WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
     note = cursor.fetchone()
@@ -255,7 +255,7 @@ def club_edit_reqok():
 
 def leader_false(club_id):
     sql = "UPDATE student_club SET is_leader = 'f' WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()   
     cursor.execute(sql, (club_id,))
     connection.commit()
@@ -264,7 +264,7 @@ def leader_false(club_id):
 
 def update_club(club_name, mail, objective, activities, note, club_id ):
     sql = "UPDATE club SET name = %s, mail = %s, objective = %s, activities = %s, note = %s, allow = 2 WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()   
     cursor.execute(sql, (club_name, mail, objective, activities, note, club_id))
     connection.commit()
@@ -273,7 +273,7 @@ def update_club(club_name, mail, objective, activities, note, club_id ):
     
 def leader_true(student_id):
     sql = "UPDATE student_club SET is_leader = 't' WHERE student_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()   
     cursor.execute(sql, (student_id,))
     connection.commit()
@@ -282,7 +282,7 @@ def leader_true(student_id):
     
 def delete_change(club_id):
     sql = "DELETE FROM club_change WHERE club_id = %s"
-    connection = get_connection()
+    connection = connection
     cursor = connection.cursor()   
     cursor.execute(sql, (club_id,))
     connection.commit()
