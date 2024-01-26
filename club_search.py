@@ -8,8 +8,8 @@ club_search_bp =  Blueprint('club_search', __name__, url_prefix='/club_search')
 
 #DB接続
 def get_connection():
-    DATABASE_URL = os.environ['DATABASE_URL']
-    connection = psycopg2.connect(DATABASE_URL)
+    url = os.environ['DATABASE_URL']
+    connection = psycopg2.connect(url)
     return connection
 
 # サークル検索
@@ -77,7 +77,7 @@ def club_search_restea():
 #サークル検索機能
 def club_search(name,introduction):
     try:
-        connection = connection
+        connection = get_connection()
         cursor = connection.cursor()
         sql = "SELECT * FROM club WHERE allow = 2 and (name LIKE %s or introduction LIKE %s) "
         name2 = "%" + name + "%"
