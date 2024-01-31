@@ -1,4 +1,4 @@
-{% extends "top/top_student.html" %}
+{% extends "layout_teacher.html" %}
 
 {% block css %}
 <link rel="stylesheet" href="{{url_for('static', filename='/css/request_detail.css')}}">
@@ -19,20 +19,20 @@
                     </tr>
                     <tr>
                     <tr>
-                        <th class="th5">活動目標</th>
-                        <td class="td5">{{objective}}</td>
+                        <th class="th3">活動目標</th>
+                        <td class="td3">{{objective}}</td>
                     </tr>
                     <tr>
-                        <th class="th6">活動内容</th>
-                        <td class="td6">{{activities}}</td>
+                        <th class="th4">活動内容</th>
+                        <td class="td4">{{activities}}</td>
                     </tr>
                     <tr>
-                        <th class="th7">サークル説明</th>
-                        <td class="td7">{{introduction}}</td>
+                        <th class="th5">サークル説明</th>
+                        <td class="td5">{{introduction}}</td>
                     </tr>
                     <tr>
-                        <th class="th7">備考</th>
-                        <td class="td7">{{note}}</td>
+                        <th class="th6">備考</th>
+                        <td class="td6">{{note}}</td>
                     </tr>
                 {% endfor %}
                 </table>
