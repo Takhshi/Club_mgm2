@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block content %}
-    <center>現在参加申請は来ていません</center>
-    <div class="notcreate">
-        <button class="backbtn" onclick="{{url_for('backtop_leader')}}">topに戻る</button>
+    <div id="list_bkbtn2">
+        <button id="back" onclick="location.href='{{url_for('backtop_leader')}}'">←戻る</button>
     </div>
+    <center>現在参加申請は来ていません</center>
 </body>
 {% endblock %}
