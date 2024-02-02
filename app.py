@@ -53,7 +53,7 @@ def index():
 @app.route('/backtop_s', methods=['post'])
 def backtop_student():
     club_list = club.club_list()
-    return render_template('top/top_student.html', club_list=club_list, student=student)
+    return render_template('top/top_student.html', club_list=club_list)
 
 @app.route('/backtop_t')
 def backtop_teacher():
