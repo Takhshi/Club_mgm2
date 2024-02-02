@@ -226,11 +226,6 @@ span{
     margin-top: -40px;
 }
 
-#list_bkbtn2{
-    float: left;
-    margin-top: 20px;
-}
-
 #back {
     text-decoration: none;
     font-size: 25px;
@@ -239,11 +234,3 @@ span{
     outline: none;
     background: none;
 }
-
-
-/* 0request */
-center {
-    margin-top: 70px;
-    font-size: 25px;
-}
-
