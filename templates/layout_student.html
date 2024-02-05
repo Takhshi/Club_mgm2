@@ -13,7 +13,9 @@
   <nav class="navbar fixed-top" style="background-color: #0693E3;">
     <div class="container-fluid">
       <div class="aBtn">
-        <a class="navbar-brand" href="{{url_for('backtop_student')}}" style="color: #ffffff; font-size: 25px" >サークル活動アプリケーション</a>
+        <form action="{{url_for('backtop_student')}}" method="post">
+          <a class="navbar-brand" type="submit" style="color: #ffffff; font-size: 25px" >サークル活動アプリケーション</a>
+        </form>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" style="background-color: #fff; margin-right:30px">
         <span class="navbar-toggler-icon"></span>
