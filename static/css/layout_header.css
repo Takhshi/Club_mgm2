@@ -13,9 +13,7 @@ body {
   border-radius: 6px;
   transition: .3s;
 }
-.aBtn:hover {
-  opacity: 0.6;
-}
+
 
 /* ログインボタン */
 .loginBtn{
