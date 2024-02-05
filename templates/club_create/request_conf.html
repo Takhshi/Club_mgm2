@@ -13,6 +13,11 @@
   {% if msg %}
     <p style="color:blue">{{ msg }}</p>
   {% endif %}
+  <div id="bkbtn">
+    <form action="{{url_for('backtop_student')}}" method="post">
+      <button type="submit" id="back" >←戻る</button>
+    </form>
+  </div>
   <form action="{{ url_for('req.request_exe') }}" method="post">
     <input type="hidden" name="member_list" value="{{member_list}}">
     <table id="frm">
@@ -52,7 +57,6 @@
             また、1名ごとに空白で改行してください。</p>
         </th> 
         <td class="td3"><input id="inp3" type="email" name="member_adresses"{% for row in range(3, member_list|length) %} value="{{member_list[row]}}" {% endfor %}  style="background-color:#FFFFFF" readonly></td>
-
       </tr>
       <tr>
         <th class="th5">
@@ -85,19 +89,8 @@
         <td class="td8"><textarea id="inp9" name="note" style="background-color:#FFFFFF" readonly>{{ note }}</textarea></td>
       </tr>
     </table>
-    <table id="frmBtn">
-      <tr>
-        <td>
-          <div id="btn1">
-            <button type="button" onclick="location.href='{{url_for('req.request_form')}}'" class="b1">戻る</button>
-          </div>
-        </td>
-        <td>
-          <div id="btn2">
-            <button type="submit" class="b2">登録</button>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <div id="btn2">
+      <button type="submit" class="b2">登録</button>
+    </div>
   </form>
 {% endblock %}

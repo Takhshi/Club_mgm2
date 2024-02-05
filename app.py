@@ -52,8 +52,10 @@ def index():
 
 @app.route('/backtop_s', methods=['post'])
 def backtop_student():
+    id = request.form.get('student')
     club_list = club.club_list()
-    return render_template('top/top_student.html', club_list=club_list)
+    student = db.get_student(id)
+    return render_template('top/top_student.html', club_list=club_list, student=student)
 
 @app.route('/backtop_t')
 def backtop_teacher():
