@@ -7,8 +7,8 @@
 
 
 {% block content %}
-<div>
-  <h2 class="h2">{{club_detail[0]}}</h2>
+<div class="club">
+  <h2 class="h2">club_detail[0]}}</h2>
   <div id="bkbtn">
       <button id="back" onclick="location.href='{{url_for('backtop_teacher')}}'">←戻る</button>
   </div>
@@ -17,15 +17,16 @@
     <div class="main">
       <div> 
           <h4>活動内容</h4>
-          <p class="content">{{club_detail[2]}}</p>
+          <p class="content">club_detail[2]}}</p>
       </div>
       <br>
       <div>
           <h4>活動目標</h4>
-          <p class="content">{{club_detail[3]}}</p>
+          <p class="content">club_detail[3]}}</p>
       </div>
       <br>
-
+    </div>
+    
     <div class="pagetop">
       <canvas id="canvas1" width="50" height="50"></canvas>
     </div>
