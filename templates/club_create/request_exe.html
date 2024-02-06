@@ -1,15 +1,96 @@
 {% extends "layout_student.html" %}
+
 {% block css %}
-<link rel="stylesheet" href="{{url_for('static', filename='/css/request.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/request.css') }}">
 <link rel="icon" href="{{url_for('static', filename='/favicon/favicon.ico')}}">
 {% endblock %}
+
 {% block content %}
-  <div class="reqdiv1">
-        <p class="reqp1">立ち上げ申請をしました</p>
-        <div id="back1">
-          <form action="{{url_for('backtop_student')}}" method="post">
-            <button type="submit" id="exeback" >トップページへ</button>
-          </form>
-        </div>
+  <h4>以下の内容でサークル立ち上げ申請をします。よろしいですか。</h4>
+  {% if error %}
+    <p style="color:red">{{ error }}</p>
+  {% endif %}
+  {% if msg %}
+    <p style="color:blue">{{ msg }}</p>
+  {% endif %}
+  <div id="bkbtn">
+    <form action="{{url_for('backtop_student')}}" method="post">
+      <button type="submit" id="back" >←戻る</button>
+    </form>
   </div>
+  <form action="{{ url_for('req.request_exe') }}" method="post">
+    <input type="hidden" name="member_list" value="{{member_list}}">
+    <table id="frm">
+      <tr>
+        <th class="th1">
+          サークル名
+          <p id="required1">必須</p>
+        </th>
+        <td class="td1"><input id="inp1" type="text" name="club_name" value="{{ club_name }}" style="background-color:#FFFFFF" required readonly></td>
+      </tr>
+      <tr>
+        <th class="th2">
+          代表者　メールアドレス
+          <p id="required2">必須</p>
+        </th>
+        <td class="td2"><input id="inp2" type="email" name="leader_mail" value="{{member_list[0]}}" style="background-color:#FFFFFF" required readonly></td>
+      </tr>
+      <tr>
+        <th class="th2">
+          サークルメンバー　メールアドレス
+          <p id="required2">必須</p>
+        </th> 
+        <td class="td2"><input id="inp2" type="email" name="member_adress1" value="{{member_list[1]}}" style="background-color:#FFFFFF" required readonly></td>
+      </tr>
+      <tr>
+        <th class="th2">
+          サークルメンバー　メールアドレス
+          <p id="required2">必須</p>
+        </th> 
+        <td class="td2"><input id="inp2" type="email" name="member_adress2" value="{{member_list[2]}}" style="background-color:#FFFFFF" required readonly></td>
+      </tr>
+      <tr>
+        <th class="th2">
+          サークルメンバー　メールアドレス
+          <p> サークルメンバーが4名以上いる場合は、
+            メールアドレスを入力してください。
+            また、1名ごとに空白で改行してください。</p>
+        </th> 
+        <td class="td3"><input id="inp3" type="email" name="member_adresses"{% for row in range(3, member_list|length) %} value="{{member_list[row]}}" {% endfor %}  style="background-color:#FFFFFF" readonly></td>
+      </tr>
+      <tr>
+        <th class="th5">
+          活動目標
+          <p id="required5">必須</p>
+          <p>簡単でいいので活動目標を教えてください。</p>
+        </th>
+        <td class="td6"><textarea id="inp6" name="objective" style="background-color:#FFFFFF" required readonly>{{ objective }}</textarea></td>
+      </tr>
+      <tr>
+        <th class="th6">
+          活動内容
+          <p id="required6">必須</p>
+          <p>簡単でいいので活動内容を教えてください。</p>
+        </th>
+        <td class="td7"><textarea id="inp7" name="activities" style="background-color:#FFFFFF" required readonly>{{ activities }}</textarea></td>
+      </tr>
+      <tr>
+        <th class="tharea7">
+          サークル説明
+          <p id="requiredarea7">必須</p>
+          <p>サークルの説明を30文字以内で記入してください。</p>
+        </th>
+        <td class="tdarea8">
+          <textarea id="textarea8" rows="1" name="introduction" style="background-color:#FFFFFF" required readonly>{{ introduction }}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="th8">備考</th>
+        <td class="td8"><textarea id="inp9" name="note" style="background-color:#FFFFFF" readonly>{{ note }}</textarea></td>
+      </tr>
+    </table>
+    <div id="btn2">
+      <button type="submit" class="b2">登録</button>
+    </div>
+  </form>
 {% endblock %}

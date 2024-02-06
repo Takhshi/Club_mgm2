@@ -7,7 +7,8 @@ app_req_bp = Blueprint('req', __name__, url_prefix='/req')
 
 @app_req_bp.route('/', methods=['GET'])
 def request_form():
-    return render_template('club_create/request_form.html')
+    student_id = request.args.get('student')
+    return render_template('club_create/request_form.html', student = student_id)
 
 @app_req_bp.route('/request_conf', methods=['POST'])
 def request_conf():
@@ -39,7 +40,7 @@ def request_conf():
     if len(member_list) >= 2:
         return render_template('club_create/request_conf.html', club_name=club_name, leader_mail=leader_mail, member_list=member_list, objective=objective, activities=activities, introduction=introduction, note=note)
     else:
-        error = 'メールアドレスが登録されていません。'
+        error = '登録に失敗しました。'
     return render_template('club_create/request_form.html', error=error)
 
 #立ち上げ申請確定
