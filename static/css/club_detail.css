@@ -1,8 +1,7 @@
 @charset "utf-8";
 
-
-.club{
-    margin-top: 1em;
+.club {
+    margin-top: 30px;
 }
 
 .h2{
@@ -10,8 +9,9 @@
 }
 
 .main{
-    margin-left: 3rem;
-    margin-right: 3rem;
+    margin-top: 70px;
+    margin-left: 5rem;
+    margin-right: 5rem;
 }
 
 .content{
@@ -20,8 +20,8 @@
 
 .join{
     position: relative;
-    top: 40px;
-    left: 1040px;
+    float: right;
+    padding-right: 70px;
 }
 
 .joinbtn{
@@ -43,20 +43,26 @@
 
 .pagetop{
     position: relative;
-    top: 100px;
-    left: 1100px;
+    float: right;
+    padding-top: 63px;
+    padding-right: 10px;
 }
 
 .pagetop0{
     position: relative;
-    top: 100px;
-    left: 1100px;
+    float: right;
+    padding-top: 63px;
+    padding-right: 10px;
 }
 
 canvas{
     position: fixed;
     border: 1px solid #0693e3;
     background-color: #0693E3;
+}
+
+.main {
+    margin-top: 60px;
 }
 
 .meminput{
@@ -98,8 +104,8 @@ canvas{
 .member{
     text-align: center;
     vertical-align: middle;
-    margin-top: 20px;
     margin-right: 1.3rem;
+    padding-bottom: 50px;
 }
 
 .member td{
@@ -108,8 +114,7 @@ canvas{
 
 #bkbtn {
     float: left;
-    margin-top: -60px;
-    padding-left: 20px;
+    margin-left: 80px;
 }
 
 #back {

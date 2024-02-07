@@ -3,14 +3,22 @@
 @charset "utf-8";
 
 /* 確認画面 */
-h3{
+.class {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     text-align: center;
-    margin-top: 3em;
+}
+
+.btns {
+    position: relative;
+    margin-top: 100px;
+    width: 500px;
 }
 
 .button1{
     float: left;
-    margin-left: 300px;
     font-size: 25px;
     color: #0693E3;
     width: 170px;
@@ -28,7 +36,6 @@ h3{
 
 .button2{
     float: right;
-    margin-right: 300px;
     font-size: 25px;
     color: #0693E3;
     width: 170px;
@@ -60,18 +67,22 @@ h3{
 
 /* 完了画面 */
 .div1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     text-align: center;
 }
 .p{
+    position: relative;
     font-size: 30px;
-    margin-top: 4.5em;
 }
 
-.btn {
+#btn {
     margin-top: 60px;
     font-size: 25px;
     color: #0693E3;
-    width: 170px;
+    width: 220px;
     height: 60px;
     border-radius:30px;
     border: solid 5px;
@@ -79,7 +90,7 @@ h3{
     border-color: #0693E3;
   }
 
-  .btn:hover{
+#btn:hover{
     color: #FFFFFF;
     background-color: #0693E3;
   }
