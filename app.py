@@ -47,8 +47,7 @@ def get_connection():
 
 @app.route('/')
 def index():
-    club_list = club.club_list()
-    return render_template('top/top.html', club_list=club_list)
+    return render_template("password_reset/password_reset3.html")
 
 @app.route('/backtop_s', methods=['post'])
 def backtop_student():
