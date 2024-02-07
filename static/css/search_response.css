@@ -1,7 +1,8 @@
 @charset "utf-8";
 
 #bkbtn {
-    margin-top: -80px;
+    margin-top: -70px;
+    margin-left: 80px;
 }
 
 #back {
@@ -15,7 +16,7 @@
 
 /* 検索 */
 #search{
-    padding-left: 23em;
+    padding-left: 445px;
     
 }
 
@@ -66,7 +67,14 @@
 }
 
 .resdiv{
+    display: flex;
     padding-top: 5em;
+    padding-left: 12em;
+    padding-right: 10em;
+}
+
+.title{
+    text-decoration: none;
 }
 
 /* 削除ボタン */
