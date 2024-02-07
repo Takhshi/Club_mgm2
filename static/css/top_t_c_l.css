@@ -2,7 +2,7 @@
 @media screen and (min-width: 481px) { }
 /* 検索 */
 #search{
-    padding-left: 370px;
+    padding-left: 445px;
 }
 
 .h4{
@@ -66,13 +66,13 @@
 
 /* table */
 .tblh3{
-    padding-top: 1rem;
-    margin-left: 5em;
+    padding-top: 0.2rem;
+    padding-left: 1rem;
 }
 
 .tbl{
     display: flex;
-    padding-left: 9rem;
+    padding-left: 13rem;
 }
 
 /* 右のボタン */
@@ -151,3 +151,9 @@
     margin-top: -4rem;
     margin-left: 7rem;
 }
+
+h3{
+    margin-top: 10px;
+    margin-left: 200px;
+}
+
