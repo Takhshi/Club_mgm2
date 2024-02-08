@@ -40,7 +40,7 @@ def request_conf():
     if len(member_list) >= 2:
         return render_template('club_create/request_conf.html', club_name=club_name, leader_mail=leader_mail, member_list=member_list, objective=objective, activities=activities, introduction=introduction, note=note)
     else:
-        error = '登録に失敗しました。'
+        error = 'メールアドレスが登録されていません'
     return render_template('club_create/request_form.html', error=error)
 
 #立ち上げ申請確定
