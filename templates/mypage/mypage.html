@@ -33,14 +33,14 @@
         </tr>
         <tr>
           <th align="center">所属サークル</th>
-            {% for club_name_list in club_name_list %}
-              <td class="list">              
+            <td class="list">              
+              {% for club_name_list in club_name_list %}
                 <input class="myinput" type="text" name="club_name" id="club_name" value="{{club_name_list[0]}}" readonly>
                 <form action="{{ url_for('club_withdrawal.club_withdrawal', club_name = club_name_list[0]  )}}" method="post" >
-                <button class="mybtn" type="submit">脱退</button>
+                  <button class="mybtn" type="submit">脱退</button>
                 </form>
-              </td>
-            {% endfor%}
+              {% endfor%}
+            </td>
         </tr>
           <th align="center">パスワード</th>
           <td><input class="input" type="text" name="password" id="password" value="*************" readonly></td>
