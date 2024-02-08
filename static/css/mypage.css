@@ -1,8 +1,24 @@
 @charset "utf-8";
 
+
+#bkbtn {
+    float: left;
+    padding-left: 30px;
+    margin-top: -60px;
+}
+
+#back {
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    border: none;
+    outline: none;
+    background: none;
+}
+
 .mypageall{
     text-align: center;
-    margin-top: 3em;
+    margin-top: 9.3em;
     margin-left: 10rem;
     margin-right: 10rem;
 }
@@ -63,17 +79,3 @@
     border-color: #ff0000;
 }
 
-
-#bkbtn {
-    float: left;
-    padding-left: 20px;
-}
-
-#back {
-    text-decoration: none;
-    font-size: 25px;
-    color: black;
-    border: none;
-    outline: none;
-    background: none;
-}
