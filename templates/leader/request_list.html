@@ -7,32 +7,29 @@
 
 
 {% block content %}
+<div id="bkbtn">
+    <form action="{{url_for('backtop_leader')}}" method="post">
+        <input type="hidden" name="student" value="{{student[0]}}">
+      <button type="submit" id="back" >←戻る</button>
+    </form>
+</div>
+<br>
+<div class="club">
     <h3>参加申請一覧</h3>
-    <div id="list_bkbtn">
-        <form action="{{url_for('backtop_leader')}}" method="post">
-            <input type="hidden" name="student" value="{{student[0]}}">
-          <button type="submit" id="back" >←戻る</button>
-        </form>
-    </div>
-    <div class="tbl">
-        <div class="position-relative">
-            <div position-absolute top-100px start-20px>
-                <table class="table table-bordered border-success"  style="margin-bottom: 60px;">
-                    <thead>
+    <div>
+                <table id="tbl">
                         <tr>
-                          <th scope="col" style="width: 200px">名前</th>
-                          <th scope="col" style="width: 400px">メールアドレス</th>
-                          <th scope="col" style="width: 100px">入学年度</th>
-                          <th scope="col" style="width: 250px">学科</th>
-                          <th scope="col" style="width: 350px"></th>
+                          <th class="th1">名前</th>
+                          <th class="th2">メールアドレス</th>
+                          <th class="th3">入学年度</th>
+                          <th class="th4">学科</th>
+                          <th class="th5"></th>
                         </tr>
-                    </thead>
-                    <tbody>
                         <tr>
                             <td>{{student[1]}}</td>
                             <td>{{student[2]}}</td>
                             <td>{{student[4]}}</td>
-                            <td>{{department[1]}}</td>
+                            <td>{{department}}</td>
                             <td>
                                 <form action="{{ url_for('club2.join_req') }}" method='post'>
                                     <input type="hidden" name="student_id" value="{{student[0]}}" readonly>
@@ -41,9 +38,9 @@
                                 </form>
                             </td>
                         </tr>
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
