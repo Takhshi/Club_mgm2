@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+.club {
+    margin-top: 30px;
+    text-align: center;
+}
+
+center {
+    font-size: 22px;
+}
+
+/* 戻る */
+#bkbtn {
+    float: left;
+    margin-left: 80px;
+  }
+  
+  #back {
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    border: none;
+    outline: none;
+    background: none;
+  }

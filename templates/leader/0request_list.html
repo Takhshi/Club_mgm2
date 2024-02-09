@@ -1,17 +1,18 @@
 {% extends "layout_leader.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="{{url_for('static', filename='/css/top_t_c_l.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='/css/0request_list.css')}}">
 <link rel="icon" href="{{url_for('static', filename='/favicon/favicon.ico')}}">
 {% endblock %}
 
 {% block content %}
+<div id="bkbtn">
+    <form action="{{url_for('backtop_leader')}}" method="post">
+      <button type="submit" id="back" >←戻る</button>
+    </form>
+</div>
+<br>
+<div class="club">
     <center>現在参加申請は来ていません</center>
-    <div class="notcreate">
-        <form action="{{url_for('backtop_leader')}}" method="post">
-            <input type="hidden" name="student" value="{{student}}">
-          <button type="submit" id="back" >←戻る</button>
-        </form>
-    </div>
-</body>
+</div>
 {% endblock %}
