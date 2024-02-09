@@ -244,25 +244,3 @@
   outline: none;
   background: none;
 }
-
-
-/* request_exe */
-#back1 {
-  margin-top: 80px;
-}
-
-#exeback {
-  font-size: 25px;
-  color: #0693E3;
-  width: 170px;
-  height: 60px;
-  border-radius:30px;
-  border: solid 5px;
-  background-color: #FFFFFF;
-  border-color: #0693E3;
-}
-
-#exeback:hover{
-  color: #FFFFFF;
-  background-color: #0693E3;
-}
