@@ -373,7 +373,7 @@ def count_joinedclub(club_id):
 
 #サークル加入人数取得
 def get_joinedmember(club_id):
-    sql = "SELECT student_id FROM student_club WHERE club_id = %s"
+    sql = "SELECT student_id FROM student_club WHERE club_id = %s AND allow = 1"
     connection = get_connection()
     cursor = connection.cursor()
     cursor.execute(sql, (club_id,))
