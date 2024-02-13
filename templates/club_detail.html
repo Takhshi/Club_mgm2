@@ -7,14 +7,15 @@
 
 
 {% block content %}
-<div id="bkbtn">
-  <form action="{{url_for('backtop_student')}}" method="post">
-    <button type="submit" id="back" >←戻る</button>
-  </form>
-</div>
-<br>
 <div class="club">
   <h2 class="h2">{{club_detail[0]}}</h2>
+  <div id="bkbtn">
+      <form action="{{url_for('backtop_student')}}" method="post">
+        <input type="hidden" name="student" value="{{student}}">
+      <button type="submit" id="back" >←戻る</button>
+      </form>
+  </div>
+  <br>
   <div class="container">
     <div class="main">
       <div> 
@@ -26,6 +27,7 @@
           <h4>活動目標</h4>
           <p class="content">{{club_detail[3]}}</p>
       </div>
+      <br>
     </div>
     <div class="join">
         <form action="{{ url_for('club.club_join_req')}}" method="POST">
@@ -38,6 +40,8 @@
     <div class="pagetop">
       <canvas id="canvas1" width="50" height="50"></canvas>
     </div>
+
+    <br>
     
     <div class="main">
       <h4 class="h4-5">メンバー</h4>
