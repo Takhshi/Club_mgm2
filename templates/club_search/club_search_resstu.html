@@ -40,7 +40,7 @@
                     {% for clubs in club %}
                     <tr>
                         <td>
-                            <a class="title" href="{{url_for('club.club_detail_nolog')}}?club_id={{clubs[0]}}">{{clubs[1]}}</a><br>
+                            <a class="title" href="{{url_for('club.club_detail')}}?club_id={{clubs[0]}}">{{clubs[1]}}</a><br>
                         </td>
                         <td>{{ clubs[5] }}</td>
                     </tr>
