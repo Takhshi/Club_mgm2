@@ -3,16 +3,22 @@
 /* これはclub_join内の上5個のためのcssです */
 /* 否認理由 */
 .notcreate{
+    margin-top: 30px;
     text-align: center;
 }
 
+.h2 {
+    font-size: 25px;
+}
+
 .notcreateteble{
-    margin-left: 11.5em;
+    text-align: center;
+    margin: auto;
 }
 
 span{
-    font-size: 20px;
     padding-right: 1em;
+    float: right;
 }
 
 .noth{
@@ -20,7 +26,7 @@ span{
 }
 
 .noku{
-    empty-cells: hide;
+    height: 20px;
 }
 
 .notcreateinput{
@@ -34,6 +40,9 @@ span{
 }
 
 .nobtn{
+    margin-top: 20px;
+    margin-right: 85px;
+    margin-bottom: 80px;
     font-size: 25px;
     color: #0693E3;
     width: 170px;
@@ -52,11 +61,13 @@ span{
 /* 否認理由確認 */
 
 .conf{
+    margin-top: 30px;
     text-align: center;
 }
 
 .conftable{
-    margin-left: 11.5em;
+    text-align: center;
+    margin: auto;
 }
 
 .confth{
@@ -68,7 +79,7 @@ span{
 }
 
 .confku{
-    empty-cells: hide;
+    height: 20px;
 }
 
 .conftextarea{
@@ -78,6 +89,9 @@ span{
 }
 
 .confbtn{
+    margin-top: 20px;
+    margin-right: 85px;
+    margin-bottom: 80px;
     font-size: 25px;
     color: #0693E3;
     width: 170px;
@@ -95,19 +109,19 @@ span{
 
 
 /* 完了 */
-
 .res{
-    margin-top: 6em;
     text-align: center;
+    margin-top: 230px;
 }
 
 .resp{
     font-size: 30px;
 }
 
-.resbtn{
-    margin-top: 5em;
+#resbtn{
+    margin-top: 30px;
     font-size: 25px;
+    text-decoration: none;
     color: #0693E3;
     width: 200px;
     height: 60px;
@@ -117,24 +131,23 @@ span{
     border-color: #0693E3;
 }
 
-.resbtn:hover{
+#resbtn:hover{
     color: #FFFFFF;
     background-color: #0693E3;
 }
 
 /* 戻るボタン */
-
 #bkbtn {
     float: left;
-    margin-top: -60px;
-}
-
-#back {
+    margin-left: 80px;
+  }
+  
+  #back {
     text-decoration: none;
     font-size: 25px;
     color: black;
     border: none;
     outline: none;
     background: none;
-}
+  }
 

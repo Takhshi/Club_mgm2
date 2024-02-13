@@ -145,34 +145,22 @@
     background-color: #FF0000;
   }
 
-  #frmBtn {
+  #btns {
     width: fit-content;
     margin: auto;
     width: 950px;
   }
 
-  #btn1 {
+  .btn1 {
     float: left;
   }
 
-  #btn2 {
-    margin-left: 350px;
-  }
-
-  #btn3 {
+  .btn2 {
     float: right;
   }
 
-  .btn1{
-    margin-left: 100px;
+  .btn3 {
+    float: right;
+    margin-right: 15px;
   }
 
-  .btn2{
-    margin-top: -60px;
-    margin-left: 670px;
-  }
-
-  .btn3{
-    margin-left: 845px;
-    margin-top: -60px;
-  }
