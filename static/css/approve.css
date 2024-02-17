@@ -59,16 +59,3 @@ td{
     outline: none;
     background: none;
 }
-
-.pagetop{
-    position: relative;
-    float: right;
-    padding-right: 110px;
-    margin-top: -130px;
-}
-
-canvas{
-    position: fixed;
-    border: 1px solid #0693e3;
-    background-color: #0693E3;
-}

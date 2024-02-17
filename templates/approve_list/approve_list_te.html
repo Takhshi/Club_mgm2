@@ -47,48 +47,4 @@
         </div>
     </div>
     
-
-
-<script> 
-    /*上ボタン*/
-    const canvas = document.querySelector('#canvas1')
-    const context = canvas.getContext('2d')
-  
-    //イベント
-    canvas.addEventListener("click",function(){
-    window.scroll({
-    top: 0,
-    behavior: "smooth",
-    });
-    })
-  
-    //描画
-    context.strokeStyle = "#FFFFFF"
-    context.lineWidth = 4
-  
-    context.beginPath()
-  
-    context.moveTo(25,15)
-    context.lineTo(25,14)
-  
-    context.stroke()
-    context.fill()
-  
-    context.beginPath()
-  
-    context.moveTo(25,15)
-    context.lineTo(10,35)
-  
-    context.stroke()
-    context.fill()
-  
-    context.beginPath()
-  
-    context.moveTo(25,15)
-    context.lineTo(40,35)
-  
-    context.stroke()
-    context.fill()
-  
-  </script>
-  {% endblock %}
+{% endblock %}
