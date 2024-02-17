@@ -66,7 +66,8 @@ def join_req():
 #申請承認機能
 #一覧からidを取得して次の画面に遷移させる処理
 def join_req_ok(student_id):
-    return render_template("join_reqest/join_req_okexe.html" ,student = student_id)
+    name = db.get_student(student_id)
+    return render_template("join_reqest/join_req_okexe.html" ,student = student_id, name = name)
 
 #下に書いてあるsqlを実行し完了画面に遷移させる処理
 @club_bp2.route("/join_req_okexe", methods=["POST"] )

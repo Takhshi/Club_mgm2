@@ -7,11 +7,12 @@
 
 
 {% block content %}
-<div class="club" >
+<div id="bkbtn">
+  <button id="back" onclick="location.href='{{url_for('index')}}'">←戻る</button>
+</div>
+<br>
+<div class="club1" >
   <h2 class="h2">{{club_detail[0]}}</h2>
-  <div id="bkbtn">
-      <button id="back" onclick="location.href='{{url_for('index')}}'">←戻る</button>
-  </div>
   <br>
   <div class="container">
     <div class="main">
@@ -24,14 +25,11 @@
           <h4>活動目標</h4>
           <p class="content">{{club_detail[3]}}</p>
       </div>
-      <br>
     </div>
 
-    <div class="pagetop">
+    <div class="pagetop1">
       <canvas id="canvas1" width="50" height="50"></canvas>
     </div>
-
-    <br>
     
     <div class="main">
       <h4 class="h4-5">メンバー</h4>

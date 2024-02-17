@@ -2,6 +2,7 @@
   
 .club {
     margin-top: 30px;
+    margin-bottom: 100px;
 }
 
 h4 {
@@ -10,20 +11,37 @@ h4 {
 
 table {
     margin: auto;
+    margin-top: 30px;
     text-align: center;
 }
    
 th{
-    font-size: 18px;
-    width: 200px;
-    height: 60px;
+    height: 40px;
     border:1px solid #707070;
+}
+
+.th1 {
+    width: 250px;    
+}
+
+.th2 {
+    width: 250px;    
+}
+
+.th3 {
+    width: 200px;    
+}
+
+.th4 {
+    width: 100px;    
+}
+
+.th5 {
+    width: 100px;    
 }
    
 td{
-    font-size: 18px;
-    width: 200px;
-    height: 70px;
+    height: 60px;
     border:1px solid #707070;
 }
 
@@ -40,4 +58,17 @@ td{
     border: none;
     outline: none;
     background: none;
+}
+
+.pagetop{
+    position: relative;
+    float: right;
+    padding-right: 110px;
+    margin-top: -130px;
+}
+
+canvas{
+    position: fixed;
+    border: 1px solid #0693e3;
+    background-color: #0693E3;
 }

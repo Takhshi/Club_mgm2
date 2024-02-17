@@ -244,3 +244,35 @@
   outline: none;
   background: none;
 }
+
+
+/* 完了画面 */
+.reqdiv1{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+
+.reqp1{
+  position: relative;
+  font-size: 30px;
+}
+
+#reqbtn{
+  margin-top: 60px;
+  font-size: 25px;
+  color: #0693E3;
+  width: 220px;
+  height: 60px;
+  border-radius:30px;
+  border: solid 5px;
+  background-color: #FFFFFF;
+  border-color: #0693E3;
+}
+
+#reqbtn:hover{
+  color: #FFFFFF;
+  background-color: #0693E3;
+}

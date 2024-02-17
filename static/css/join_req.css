@@ -1,13 +1,44 @@
 @charset "utf-8";
 
 /* 申請一覧 */
+.club {
+    margin-top: 30px;
+}
+
 h3{
     text-align: center;
 }
 
-.tbl{
+.table th, .table td {
+    border: 1px solid;
+}
+
+.table {
     text-align: center;
-    margin-top: 2em;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 1100px;
+    table-layout: fixed;
+}
+
+.th1 {
+    width: 230px;   
+}
+
+.th2 { 
+    width: 300px;
+}
+
+.th3 { 
+    width: 120px;
+}
+
+.th4 {
+    width: 200px; 
+}
+
+.th5 {
+    width: 250px; 
 }
 
 td{
@@ -46,28 +77,28 @@ td{
     background-color: #ff0000;
 }
 
-/* 承認 */
 
+/* 承認 */
 .ok{
     text-align: center;
-
-    margin-top: 5em;
-
+    margin-top: 50px;
 }
 
-.okform{
-    margin-top: 5em;
+#p {
+    font-size: 28px;
 }
 
-.okinput{
-    width: 350px;
+#okform{
+    margin-top: 80px;
+}
+
+#okinput{
+    margin-top: 50px;
     font-size: 25px;
 }
 
-.okbtn{
-
-    margin-top: 4em;
-
+#okbtn{
+    margin-top: 50px;
     font-size: 25px;
     color: #0693E3;
     width: 200px;
@@ -78,7 +109,7 @@ td{
     border-color: #0693E3;
 }
 
-.okbtn:hover{
+#okbtn:hover{
     color: #FFFFFF;
     background-color: #0693E3;
 }
@@ -86,15 +117,18 @@ td{
 /* 否認理由 */
 .no{
     text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
 }
 
 .notable{
-    margin-left: 11.5em;
+    margin: 0 auto;
+    margin-top: 30px; 
 }
 
-span{
-    font-size: 20px;
-    padding-right: 1em;
+.notable th {
+    float: right;
+    padding-right: 0.5em;
 }
 
 .noth{
@@ -102,7 +136,7 @@ span{
 }
 
 .noku{
-    empty-cells: hide;
+    height: 15px;
 }
 
 .noinput{
@@ -116,6 +150,8 @@ span{
 }
 
 .nobtn{
+    margin-top: 30px;
+    margin-right: 70px;
     font-size: 25px;
     color: #0693E3;
     width: 170px;
@@ -131,26 +167,34 @@ span{
     background-color: #0693E3;
 }
 
-/* 否認理由確認 */
 
+/* 否認理由確認 */
 .conf{
     text-align: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
 }
 
 .conftable{
-    margin-left: 11.5em;
+    margin: 0 auto;
+    margin-top: 30px; 
+}
+
+.conftable th {
+    float: right;
+    padding-right: 0.5em;
 }
 
 .confth{
     vertical-align: top;
 }
 
-.confinput{
-    width: 550px;
+.confku{
+    height: 15px;
 }
 
-.confku{
-    empty-cells: hide;
+.confinput{
+    width: 550px;
 }
 
 .conftextarea{
@@ -160,6 +204,8 @@ span{
 }
 
 .confbtn{
+    margin-top: 30px;
+    margin-right: 70px;
     font-size: 25px;
     color: #0693E3;
     width: 170px;
@@ -178,19 +224,23 @@ span{
 /* 完了 */
 
 .res{
-    margin-top: 6em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     text-align: center;
 }
 
 .resp{
+    position: relative;
     font-size: 30px;
 }
 
 .resbtn{
-    margin-top: 5em;
+    margin-top: 60px;
     font-size: 25px;
     color: #0693E3;
-    width: 200px;
+    width: 220px;
     height: 60px;
     border-radius:30px;
     border: solid 5px;
@@ -204,13 +254,14 @@ span{
 }
 
 
-
-/* 戻る */
-#bkbtn {
-    float: left;
-    margin-top: -75px;
+/* 0request_list.html */
+#center {
+    margin-top: 30px;
+    font-size: 25px;
 }
 
+
+/* 戻る */
 #h3 {
     margin-top: 20px;
 }
@@ -221,9 +272,9 @@ span{
     margin-top: -150px;
 }
 
-#list_bkbtn{
+#bkbtn {
     float: left;
-    margin-top: -40px;
+    margin-left: 80px;
 }
 
 #back {

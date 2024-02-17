@@ -7,40 +7,31 @@
 
 
 {% block content %}
-<div class="conf">
-  <h2>否認理由入力内容確認</h2>
-  <br>
   <div id="bkbtn">
     <button id="back" onclick="location.href='{{url_for('club2.join_req_noexe')}}'">←戻る</button>
   </div>
-  <div class="conftable">
-    <table>
-      <thead>
+  <br>
+  <div class="conf">
+    <h3>否認理由入力内容確認</h3>
+      <table class="conftable">
         <tr>
-          <th><span>件名</span></th>
+          <th>件名</th>
           <td><input class="confinput" type="text" value="サークルの参加申請について" readonly></td>
         </tr>
-      </thead>
-      <tbody>
         <tr>
-          <td class="confku">
-            <br>
-          </td>
+          <td class="confku"></td>
         </tr>
         <tr>
-          <th class="confth"><span>否認理由</span></th>
+          <th class="confth">否認理由</th>
           <td>
             <form action="{{ url_for('club2.join_req_noconf') }}" method='POST'>
-              <textarea class="conftextarea" type="text" name="reason" value="{{reason}}" ></textarea>
+              <textarea class="conftextarea" type="text" name="reason" value="{{reason}}" >{{reason}}</textarea>
               <br>
               <button class="confbtn" type="submit">送信</button>
+            </form>
           </td>
-
-
         </tr>
-      </tbody>
-    </table>
+      </table>
   </div>
-</div>
 {% endblock %}
 
